@@ -23,11 +23,8 @@ export interface Project {
 }
 
 interface ListProps extends TableProps<Project> {//TableProps是Table所有的属性的集合的类型
-  // list: Project[];
   users: User[];
   refresh?: () => void;
-  projectButton: JSX.Element;
-
 }
 /*ListProps由TableProps和users组成 */
 // type PropsType = Omit<ListProps, 'users'>
@@ -92,7 +89,7 @@ export const List = ({ users, ...props }: ListProps) => {
               <Dropdown
                 overlay={
                   <Menu>
-                    <Menu.Item key={"edit"}>{props.projectButton}</Menu.Item>
+                    <Menu.Item key={"edit"}></Menu.Item>
                   </Menu>
                 }
               >

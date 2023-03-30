@@ -12,8 +12,11 @@ import { Project } from "screens/project-list/list";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useUrlQueryParam } from "utils/url";
-import { useProjectsSearchParams } from "./util";
-import { Row } from "components/lib";
+import {
+  useProjectModal,
+  useProjectsSearchParams
+} from "./util";
+import { ButtonNoPadding, Row } from "components/lib";
 
 // 状态提升可以让组件共享状态，但是容易造成 prop drilling
 
@@ -21,9 +24,7 @@ import { Row } from "components/lib";
 // 使用 JS 的同学，大部分的错误都是在 runtime(运行时) 的时候发现的
 // 我们希望，在静态代码中，就能找到其中的一些错误 -> 强类型
 
-export const ProjectListScreen = (props: {
-  props: { projectButton: JSX.Element }
-}) => {
+export const ProjectListScreen = () => {
   // 8-6被替换了
   // const [param, setParam] = useState({
   //   name: "",
@@ -46,6 +47,7 @@ export const ProjectListScreen = (props: {
 
 
 
+  const { open } = useProjectModal();
 
   const [param, setParam] = useProjectsSearchParams();
   const { isLoading, error, data: list, retry } = useProjects(useDebounce(param, 200));
@@ -79,13 +81,13 @@ export const ProjectListScreen = (props: {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        {props.projectButton}
-      </Row>
+        <ButtonNoPadding onClick={open} type={"link"}>
+          创建项目
+        </ButtonNoPadding>      </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
       <List
-        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         users={users || []}

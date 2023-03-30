@@ -13,3 +13,22 @@ export const useProjectsSearchParams = () => {
     setParam,
   ] as const;
 };
+
+
+
+//扮演着全局状态管理器的作用
+export const useProjectModal = () => {
+  const [{ projectCreate }, setProjectCreate] = useUrlQueryParam([
+    "projectCreate",
+  ]);
+
+  const open = () => setProjectCreate({ projectCreate: true });
+  // const close = () => setProjectCreate({ projectCreate: false });//改为undefined不会被转为字符串，想要一个空的效果
+  const close = () => setProjectCreate({ projectCreate: undefined });
+
+  return {
+    projectModalOpen: projectCreate === "true",
+    open,
+    close,
+  };
+};
