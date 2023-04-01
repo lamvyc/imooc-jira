@@ -1,32 +1,32 @@
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo,useState } from "react";
 import { cleanObject, subset } from "utils/index";
 
 /**
  * 返回页面url中，指定键的参数值
  */
-export const useUrlQueryParam = <K extends string>(keys: K[]) => {//示例参数["name", "personId"]
-  const [searchParams, setSearchParam] = useSearchParams();
-  return [
-    useMemo(
-      () =>
-        subset(Object.fromEntries(searchParams), keys) as {
-          [key in K]: string;
-        },
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      [searchParams]
-    ),
-    (params: Partial<{ [key in K]: unknown }>) => {
-      // iterator
-      // iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
-      const o = cleanObject({
-        ...Object.fromEntries(searchParams),
-        ...params,
-      }) as URLSearchParamsInit;
-      return setSearchParam(o);
-    },
-  ] as const
-};
+// export const useUrlQueryParam = <K extends string>(keys: K[]) => {//示例参数["name", "personId"]
+//   const [searchParams, setSearchParam] = useSearchParams();
+//   return [
+//     useMemo(
+//       () =>
+//         subset(Object.fromEntries(searchParams), keys) as {
+//           [key in K]: string;
+//         },
+//       // eslint-disable-next-line react-hooks/exhaustive-deps
+//       [searchParams]
+//     ),
+//     (params: Partial<{ [key in K]: unknown }>) => {
+//       // iterator
+//       // iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
+//       const o = cleanObject({
+//         ...Object.fromEntries(searchParams),
+//         ...params,
+//       }) as URLSearchParamsInit;
+//       return setSearchParam(o);
+//     },
+//   ] as const
+// };
 
 /*
 这段代码中的 as const 出现在返回值类型的声明中，它的作用是将返回值的类型从普通的元组类型变成一个只读的元组类型。
@@ -38,7 +38,6 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {//示例参数
     另外，如果返回值类型为普通的元组类型，那么第二个值的类型可能也会被推断为一个可变的函数类型，这个函数可能会修改外部变量，
 而 TypeScript 也不会发出任何警告。
 */
-
 
 
 
@@ -65,9 +64,40 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {//示例参数
 
 
 
+/**
+ * 返回页面url中，指定键的参数值
+ */
+export const useUrlQueryParam = <K extends string>(keys: K[]) => {
+  const [searchParams] = useSearchParams();
+  const setSearchParams = useSetUrlSearchParam();
+  const [stateKeys] = useState(keys);
+  return [
+    useMemo(
+      () =>
+        subset(Object.fromEntries(searchParams), stateKeys) as {
+          [key in K]: string;
+        },
+      [searchParams, stateKeys]
+    ),
+    (params: Partial<{ [key in K]: unknown }>) => {
+      return setSearchParams(params);
+      // iterator
+      // iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
+    },
+  ] as const;
+};
 
-// const a = ['12']
-// const b = ['12'] as const
+//单独抽离解决地址栏中url=>点击创建项目--关闭弹窗，地址栏url展示错误的问题
+export const useSetUrlSearchParam = () => {
+  const [searchParams, setSearchParam] = useSearchParams();
+  return (params: { [key in string]: unknown }) => {
+    const o = cleanObject({
+      ...Object.fromEntries(searchParams),
+      ...params,
+    }) as URLSearchParamsInit;
+    return setSearchParam(o);
+  };
+};
 
 
 
