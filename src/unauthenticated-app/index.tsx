@@ -7,6 +7,7 @@ import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
 import { useDocumentTitle } from "utils";
+import { ErrorBox } from "components/lib";
 // import {Helmet} from 'react-helmet'
 
 
@@ -41,9 +42,11 @@ useDocumentTitle('请登录注册以继续')
       <Background />
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
-        {error ? (
+        <ErrorBox error={error} />
+        {/*用上面的形式替换下面的*/}
+        {/* {error ? (
           <Typography.Text type={"danger"}>{error.message}</Typography.Text>
-        ) : null}
+        ) : null} */}
         {isRegister ? (
           <RegisterScreen onError={setError} />
         ) : (

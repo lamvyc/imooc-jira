@@ -6,8 +6,8 @@ type SelectProps = React.ComponentProps<typeof Select>;//Select自己身上带�
 
 interface IdSelectProps
   extends Omit<SelectProps, "value" | "onChange" | "options"> {//在extends时你的类型和被继承的母类型有相同的键时很容易造成冲突
-  value: Raw | null | undefined;
-  onChange: (value?: number) => void;
+  value?: Raw | null | undefined;
+  onChange?: (value?: number) => void;
   defaultOptionName?: string;
   options?: { name: string; id: number }[];
 }
@@ -26,7 +26,9 @@ export const IdSelect = (props: IdSelectProps) => {
   return (
     <Select
       value={options?.length ? toNumber(value) : 0}//一个小bug
-      onChange={(value) => onChange(toNumber(value) || undefined)}
+      // onChange={(value) => onChange(toNumber(value) || undefined)}
+      onChange={(value) => onChange?.(toNumber(value) || undefined)}
+
       {...restProps}
     >
       {defaultOptionName ? (

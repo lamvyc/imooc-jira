@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Pin } from "components/pin";
 import { useEditProject } from "utils/project";
 import { ButtonNoPadding } from "components/lib";
+import { useProjectModal } from "screens/project-list/util";
 
 
 
@@ -24,14 +25,14 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {//TableProps是Table所有的属性的集合的类型
   users: User[];
-  refresh?: () => void;
 }
 /*ListProps由TableProps和users组成 */
 // type PropsType = Omit<ListProps, 'users'>
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
-  const pinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh);//9-3这里用柯里化处理了下
+  const { startEdit } = useProjectModal();
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin })
+  const editProject = (id: number) => () => startEdit(id);
 
   return (
     <Table
@@ -89,7 +90,10 @@ export const List = ({ users, ...props }: ListProps) => {
               <Dropdown
                 overlay={
                   <Menu>
-                    <Menu.Item key={"edit"}></Menu.Item>
+                    <Menu.Item onClick={editProject(project.id)} key={"edit"}>
+                      编辑
+                    </Menu.Item>
+                    <Menu.Item key={"delete"}>删除</Menu.Item>
                   </Menu>
                 }
               >
