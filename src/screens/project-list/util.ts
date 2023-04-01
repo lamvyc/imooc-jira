@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 // 项目列表搜索的参数
 export const useProjectsSearchParams = () => {
   const [param, setParam] = useUrlQueryParam(["name", "personId"]);
-  console.log(param.personId)
+  // console.log(param.personId)
   return [
     useMemo(
       () => ({ ...param, personId: Number(param.personId) || undefined }),
@@ -35,6 +35,11 @@ export const useProjectsSearchParams = () => {
 //     close,
 //   };
 // };
+
+export const useProjectsQueryKey = () => {
+  const [params] = useProjectsSearchParams();
+  return ["projects", params];
+};
 
 
 export const useProjectModal = () => {
