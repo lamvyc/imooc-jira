@@ -2,27 +2,12 @@ import React from "react";
 import { Form, Input, Select } from "antd";
 import { Project } from "./list";
 import { UserSelect } from "components/user-select";
+import { User } from "types/user";
 
 //第一行，指定本文件的编译器
-
-
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  title: string;
-  organization: string;
-  token: string;
-}
-
 interface SearchPanelProps {
   users: User[];
   param: Partial<Pick<Project, 'name' | 'personId'>>;
-  // param: {
-  //   name: string;
-  //   personId: string;
-  // };
   setParam: (param: SearchPanelProps["param"]) => void;
 }
 /*负责人那一行*/

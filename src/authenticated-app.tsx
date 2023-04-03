@@ -63,15 +63,15 @@ export const AuthenticatedApp = () => {
                         <Route path={"/projects"}
                             element={
                                 <ProjectListScreen
-                                    //不需要这些了
-                                    // projectButton={
-                                    //     <ButtonNoPadding
-                                    //         onClick={() => setProjectModalOpen(true)}
-                                    //         type={"link"}
-                                    //     >
-                                    //         创建项目
-                                    //     </ButtonNoPadding>
-                                    // }
+                                //不需要这些了
+                                // projectButton={
+                                //     <ButtonNoPadding
+                                //         onClick={() => setProjectModalOpen(true)}
+                                //         type={"link"}
+                                //     >
+                                //         创建项目
+                                //     </ButtonNoPadding>
+                                // }
                                 />
                             }
                         />
@@ -148,9 +148,13 @@ const Header = styled(Row)`
   padding: 3.2rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
-`; const HeaderLeft = styled(Row)``;
+`;
+const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.div``;
-const Main = styled.main``;
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+  `;
 
 
 
