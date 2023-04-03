@@ -54,9 +54,12 @@ const Aside = styled.aside`
 const Main = styled.div`
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
   display: flex;
+  overflow: hidden;//加了下面就有滚动条了
+
 `;
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16rem 1fr;
+  /* overflow: hidden; */
 `;
