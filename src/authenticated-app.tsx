@@ -132,9 +132,9 @@ const User = () => {
 // eslint-disable-next-line no-lone-blocks
 {/* <HeaderItem as = {'div'}></HeaderItem> */ }//通过这种方式将h3变为div
 
-const HeaderItem = styled.h3`
-  margin-right: 3rem;
-`;
+// const HeaderItem = styled.h3`
+//   margin-right: 3rem;
+// `;
 
 // temporal dead zone(暂时性死区)
 const Container = styled.div`

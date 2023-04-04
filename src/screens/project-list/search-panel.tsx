@@ -42,7 +42,6 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
           }
         />
       </Form.Item>
-
     </Form>
   );
 };

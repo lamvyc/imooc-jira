@@ -56,14 +56,19 @@ export const KanbanScreen = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <ScreenContainer>
-        <h1>{currentProject?.name}看板</h1>
-        <SearchPanel />
-        {isLoading ? (
-          <Spin size={"large"} />
-        ) : (
-          <Drop type={"COLUMN"} direction={"horizontal"} droppableId={"kanban"}>
-            <ColumnsContainer>
+    <ScreenContainer>
+      <h1>{currentProject?.name}看板</h1>
+      <SearchPanel />
+      {isLoading ? (
+        <Spin size={"large"} />
+      ) : (
+        <ColumnsContainer>
+          <Drop
+            type={"COLUMN"}
+            direction={"horizontal"}
+            droppableId={"kanban"}
+          >
+            <DropChild style={{ display: "flex" }}>
               {kanbans?.map((kanban, index) => (
                 <Drag
                   key={kanban.id}
@@ -73,13 +78,14 @@ export const KanbanScreen = () => {
                   <KanbanColumn kanban={kanban} key={kanban.id} />
                 </Drag>
               ))}
-              <CreateKanban />
-            </ColumnsContainer>
+            </DropChild>
           </Drop>
-        )}
-        <TaskModal />
-      </ScreenContainer>
-    </DragDropContext>
+          <CreateKanban />
+        </ColumnsContainer>
+      )}
+      <TaskModal />
+    </ScreenContainer>
+  </DragDropContext>
   );
 };
 
@@ -139,7 +145,7 @@ export const useDragEnd = () => {
 
 
 
-export const ColumnsContainer = styled(DropChild)`
+export const ColumnsContainer = styled('div')`
   display: flex;
   overflow-x: scroll;
   flex: 1;//去抢占剩余空间
