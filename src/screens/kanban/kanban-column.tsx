@@ -37,7 +37,7 @@ const TaskCard = ({ task }: { task: Task }) => {
       key={task.id}
     >
       <p>
-      <Mark keyword={keyword} name={task.name} />
+        <Mark keyword={keyword} name={task.name} />
       </p>
       <TaskTypeIcon id={task.typeId} />
     </Card>
@@ -49,33 +49,55 @@ const TaskCard = ({ task }: { task: Task }) => {
 
 
 
-export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
+// export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
+//   const { data: allTasks } = useTasks(useTasksSearchParams());
+//   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
+//   return (
+//     <Container>
+//       <Row between={true}>
+//         <h3>{kanban.name}</h3>
+//         <More kanban={kanban} />
+//       </Row>
+//       <TasksContainer>
+//         {/* {tasks?.map((task) => (
+//           <Card style={{ marginBottom: "0.5rem" }} key={task.id}>
+//             <div>{task.name}</div>
+//             <TaskTypeIcon id={task.typeId} />
+//           </Card>
+//         ))} */}
+//         {tasks?.map((task) => (
+//           <TaskCard key={task.id} task={task} />
+//         ))}
+//         <CreateTask kanbanId={kanban.id} />
+//       </TasksContainer>
+//     </Container>
+//   );
+// };
+
+
+
+
+export const KanbanColumn = React.forwardRef<
+  HTMLDivElement,
+  { kanban: Kanban }
+>(({ kanban, ...props }, ref) => {
   const { data: allTasks } = useTasks(useTasksSearchParams());
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
   return (
-    <Container>
+    <Container {...props} ref={ref}>
       <Row between={true}>
         <h3>{kanban.name}</h3>
-        <More kanban={kanban} />
+        <More kanban={kanban} key={kanban.id} />
       </Row>
-
-
       <TasksContainer>
-        {/* {tasks?.map((task) => (
-          <Card style={{ marginBottom: "0.5rem" }} key={task.id}>
-            <div>{task.name}</div>
-            <TaskTypeIcon id={task.typeId} />
-          </Card>
-        ))} */}
         {tasks?.map((task) => (
-          <TaskCard task={task} />
+          <TaskCard key={task.id} task={task} />
         ))}
         <CreateTask kanbanId={kanban.id} />
       </TasksContainer>
     </Container>
   );
-};
-
+});
 
 const More = ({ kanban }: { kanban: Kanban }) => {
   const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
