@@ -81,20 +81,20 @@ export const ProjectListScreen = () => {
 
   return (
     <ScreenContainer>
-      <Row between={true}>
-        <h1>项目列表</h1>
-        <ButtonNoPadding onClick={open} type={"link"}>
-          创建项目
-        </ButtonNoPadding>
-      </Row>
-      <SearchPanel users={users || []} param={param} setParam={setParam} />
-      <ErrorBox error={error} />
+        <Row marginBottom={2} between={true}>
+          <h1>项目列表</h1>
+          <ButtonNoPadding onClick={open} type={"link"}>
+            创建项目
+          </ButtonNoPadding>
+        </Row>
+        <SearchPanel users={users || []} param={param} setParam={setParam} />
+        <ErrorBox error={error} />
 
-      {/* {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null} */}
-      <List
-        loading={isLoading}
-        users={users || []}
-        dataSource={list || []} />
+        {/* {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null} */}
+        <List
+          loading={isLoading}
+          users={users || []}
+          dataSource={list || []} />
     </ScreenContainer>
   );
 };
