@@ -6,6 +6,11 @@ import { EpicScreen } from "screens/epic";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Menu } from "antd";
+//以下皆是组件测试
+import { PropsDetail } from 'code-readerjsx/props-detail'
+import {ErrorBoundaryExample} from 'code-readerjsx/error-boundary'
+
+import { CodeReadingTsx } from "code-readertsx";
 
 const useRouteType = () => {
   const units = useLocation().pathname.split("/");
@@ -13,6 +18,7 @@ const useRouteType = () => {
 };
 
 export const ProjectScreen = () => {
+  console.log(window.location.pathname)
   const routeType = useRouteType();
   return (
     <Container>
@@ -26,6 +32,12 @@ export const ProjectScreen = () => {
           <Menu.Item key={"epic"}>
             <Link to={"epic"}>任务组</Link>
           </Menu.Item>
+          <Menu.Item key={"propsDetail"}>
+            <Link to={"propsDetail"}>props详解</Link>
+          </Menu.Item>
+          <Menu.Item key={"errorBoundaryExample"}>
+            <Link to={"errorBoundaryExample"}>ErrorBoundary</Link>
+          </Menu.Item>
         </Menu>
       </Aside>
       <Main>
@@ -34,6 +46,10 @@ export const ProjectScreen = () => {
           <Route path={"/kanban"} element={<KanbanScreen />} />
           {/*projects/:projectId/epic*/}
           <Route path={"/epic"} element={<EpicScreen />} />
+          <Route path={"/propsDetail"} element={<PropsDetail />} />
+          <Route path={"/errorBoundaryExample"} element={<ErrorBoundaryExample />} />
+
+          
           <Route path="*" element={<Navigate to={window.location.pathname + "/kanban"} replace={true} />} />
           {/* <Navigate to={window.location.pathname + "/kanban"} /> */}
         </Routes>
