@@ -9,6 +9,11 @@ import { Menu } from "antd";
 //以下皆是组件测试
 import { PropsDetail } from 'code-readerjsx/props-detail'
 import {ErrorBoundaryExample} from 'code-readerjsx/error-boundary'
+import { GrandFather } from "code-readerjsx/ref-advanced1";//场景一:跨层级获取
+import {Home} from 'code-readerjsx/ref-advanced2'//场景二:合并转发ref
+import {HocHome} from 'code-readerjsx/ref-advanced3'//场景三：高阶组件转发
+import { Index } from "code-readerjsx/ref-advanced4";
+
 
 import { CodeReadingTsx } from "code-readertsx";
 
@@ -38,6 +43,18 @@ export const ProjectScreen = () => {
           <Menu.Item key={"errorBoundaryExample"}>
             <Link to={"errorBoundaryExample"}>ErrorBoundary</Link>
           </Menu.Item>
+          <Menu.Item key={"refAdvanced1"}>
+            <Link to={"refAdvanced1"}>1.跨层级获取</Link>
+          </Menu.Item>
+          <Menu.Item key={"refAdvanced2"}>
+            <Link to={"refAdvanced2"}>2.合并转发ref</Link>
+          </Menu.Item>
+          <Menu.Item key={"refAdvanced3"}>
+            <Link to={"refAdvanced3"}>3.高阶组件转发</Link>
+          </Menu.Item>
+          <Menu.Item key={"refAdvanced4"}>
+            <Link to={"refAdvanced4"}>4.父组件调用子组件方法(ref通信)</Link>
+          </Menu.Item>
         </Menu>
       </Aside>
       <Main>
@@ -49,7 +66,11 @@ export const ProjectScreen = () => {
           <Route path={"/propsDetail"} element={<PropsDetail />} />
           <Route path={"/errorBoundaryExample"} element={<ErrorBoundaryExample />} />
 
-          
+          <Route path={"/refAdvanced1"} element={<GrandFather />} />
+          <Route path={"/refAdvanced2"} element={<Home />} />
+          <Route path={"/refAdvanced3"} element={<HocHome />} />
+          <Route path={"/refAdvanced4"} element={<Index />} />
+
           <Route path="*" element={<Navigate to={window.location.pathname + "/kanban"} replace={true} />} />
           {/* <Navigate to={window.location.pathname + "/kanban"} /> */}
         </Routes>
