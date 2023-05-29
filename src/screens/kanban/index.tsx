@@ -56,36 +56,36 @@ export const KanbanScreen = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-    <ScreenContainer>
-      <h1>{currentProject?.name}看板</h1>
-      <SearchPanel />
-      {isLoading ? (
-        <Spin size={"large"} />
-      ) : (
-        <ColumnsContainer>
-          <Drop
-            type={"COLUMN"}
-            direction={"horizontal"}
-            droppableId={"kanban"}
-          >
-            <DropChild style={{ display: "flex" }}>
-              {kanbans?.map((kanban, index) => (
-                <Drag
-                  key={kanban.id}
-                  draggableId={"kanban" + kanban.id}
-                  index={index}
-                >
-                  <KanbanColumn kanban={kanban} key={kanban.id} />
-                </Drag>
-              ))}
-            </DropChild>
-          </Drop>
-          <CreateKanban />
-        </ColumnsContainer>
-      )}
-      <TaskModal />
-    </ScreenContainer>
-  </DragDropContext>
+      <ScreenContainer>
+        <h1>{currentProject?.name}看板</h1>
+        <SearchPanel />
+        {isLoading ? (
+          <Spin size={"large"} />
+        ) : (
+          <ColumnsContainer>
+            <Drop
+              type={"COLUMN"}
+              direction={"horizontal"}
+              droppableId={"kanban"}
+            >
+              <DropChild style={{ display: "flex" }}>
+                {kanbans?.map((kanban, index) => (
+                  <Drag
+                    key={kanban.id}
+                    draggableId={"kanban" + kanban.id}
+                    index={index}
+                  >
+                    <KanbanColumn kanban={kanban} key={kanban.id} />
+                  </Drag>
+                ))}
+              </DropChild>
+            </Drop>
+            <CreateKanban />
+          </ColumnsContainer>
+        )}
+        <TaskModal />
+      </ScreenContainer>
+    </DragDropContext>
   );
 };
 
@@ -149,4 +149,30 @@ export const ColumnsContainer = styled('div')`
   display: flex;
   overflow-x: scroll;
   flex: 1;//去抢占剩余空间
+ /* 滚动条轨道 */
+ ::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 轨道背景色 */
+  border-radius: 5px; /* 设置滑块的圆角 */
+
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1; /* 滑块背景色 */
+  border-radius: 5px; /* 设置滑块的圆角 */
+
+}
+
+/* 滚动条边框 */
+::-webkit-scrollbar {
+  width: 8px; /* 滚动条宽度 */
+  height: 10px;
+  background-color: #f1f1f1; /* 滚动条背景色 */
+  border-radius: 5px; /* 滚动条边角 */
+}
+
+/* 鼠标悬停时的滚动条滑块样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 悬停时滑块背景色 */
+}
 `;

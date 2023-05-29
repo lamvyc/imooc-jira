@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useEpicSearchParams, useEpicsQueryKey } from "screens/epic/util";
 import { Epic } from "types/epic";
 import { CreateEpic } from "screens/epic/create-epic";
+import styled from "@emotion/styled";
 
 export const EpicScreen = () => {
   const { data: currentProject } = useProjectInUrl();
@@ -29,7 +30,7 @@ export const EpicScreen = () => {
   };
 
   return (
-    <ScreenContainer>
+    <ScreenContainerMain>
       <Row between={true}>
         <h1>{currentProject?.name}任务组</h1>
         <Button onClick={() => setEpicCreateOpen(true)} type={"link"}>
@@ -37,7 +38,7 @@ export const EpicScreen = () => {
         </Button>
       </Row>
       <List
-        style={{ overflow: "scroll" }}
+        // style={{ overflow: "scroll" }}
         dataSource={epics}
         itemLayout={"vertical"}
         renderItem={(epic) => (
@@ -77,6 +78,44 @@ export const EpicScreen = () => {
         onClose={() => setEpicCreateOpen(false)}
         visible={epicCreateOpen}
       />
-    </ScreenContainer>
+    </ScreenContainerMain>
   );
 };
+
+
+
+const ScreenContainerMain = styled.div`
+  padding-top: 1.2rem;
+  padding-left: 1.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  overflow-y: auto;
+   /* 滚动条轨道 */
+ ::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 轨道背景色 */
+  border-radius: 5px; /* 设置滑块的圆角 */
+
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1; /* 滑块背景色 */
+  border-radius: 5px; /* 设置滑块的圆角 */
+
+}
+
+/* 滚动条边框 */
+::-webkit-scrollbar {
+  width: 8px; /* 滚动条宽度 */
+  height: 10px;
+  background-color: #f1f1f1; /* 滚动条背景色 */
+  border-radius: 5px; /* 滚动条边角 */
+}
+
+/* 鼠标悬停时的滚动条滑块样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 悬停时滑块背景色 */
+}
+`;

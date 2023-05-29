@@ -61,6 +61,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@types/lodash": "^4.14.195",
     "@types/qs": "^6.9.5",
     "@types/react-beautiful-dnd": "13.0.0",
     "@types/react-helmet": "^6.1.6",

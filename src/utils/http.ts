@@ -126,6 +126,8 @@ type Person = {
     name: string;
     age: number;
 };
+
+//Partial<Person>令所有属性变为可选
 const xiaoMing: Partial<Person> = {};//5-9  11：00
 const shenMiRen: Omit<Person, "name" | "age"> = {};
 type PersonKeys = keyof Person;

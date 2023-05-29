@@ -68,7 +68,8 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
 
 
 export const ScreenContainer = styled.div`
-  padding: 3.2rem;
+  padding-top: 1.2rem;
+  padding-left: 1.2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
