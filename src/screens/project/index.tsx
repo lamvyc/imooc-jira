@@ -24,10 +24,9 @@ import EditableUseExample2 from 'code-readertsx/editable-hooks-use2'
 import EditableUseExample3 from 'code-readertsx/editable-hooks-use3'
 import EditableUseExample4 from 'code-readertsx/editable-hooks-use4'
 import EditableUseExample5 from 'code-readertsx/editable-hooks-use5'
+import VirtualSEx from 'code-readerjsx/virtualScroll'
 
 
-
-// import { CodeReadingTsx } from "code-readertsx";
 
 
 const useRouteType = () => {
@@ -93,6 +92,9 @@ export const ProjectScreen = () => {
           <Menu.Item key={"EditableUse5"}>
             <Link to={"EditableUse5"}>EditableUse</Link>
           </Menu.Item>
+          <Menu.Item key={"virtualSEx"}>
+            <Link to={"virtualSEx"}>virtualSEx</Link>
+          </Menu.Item>
           <Menu.Item key={"test"}>
             <Link to={"test"}>test</Link>
           </Menu.Item>
@@ -119,11 +121,11 @@ export const ProjectScreen = () => {
           <Route path={"/EditableUse3"} element={<EditableUseExample3 />} />
           <Route path={"/EditableUse4"} element={<EditableUseExample4 />} />
           <Route path={"/EditableUse5"} element={<EditableUseExample5 />} />
+          <Route path={"/virtualSEx"} element={<VirtualSEx />} />
 
 
 
           <Route path={"/test"} element={<MyComponent />} />
-
           <Route path="*" element={<Navigate to={"/projects/" + useProjectIdInUrl() + "/kanban"} replace={true} />} />
           {/* <Navigate to={window.locat ion.pathname + "/kanban"} /> */}
         </Routes>
@@ -137,7 +139,7 @@ export const ProjectScreen = () => {
 
 
 const Aside = styled.aside`
-  background-color: rgb(244, 245, 247);
+  /* background-color: rgb(244, 245, 247); */
   display: flex;
   margin-top: 4px;
   overflow-y: auto;
